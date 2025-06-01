@@ -98,9 +98,24 @@ class _EditScreenState extends State<EditScreen> {
                       SizedBox(
                         width: 20,
                       ),
-                      Text(
-                        DateFormat('yyyy-MM-dd').format(dateTask),
-                        style: TextStyle(color: Colors.grey, fontSize: 14),
+                      InkWell(
+                        onTap: () async {
+                          DateTime? selectedDate = await showDatePicker(
+                            context: context,
+                            initialDate: dateTask,
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2100),
+                          );
+                          if (selectedDate != null) {
+                            setState(() {
+                              dateTask = selectedDate;
+                            });
+                          }
+                        },
+                        child: Text(
+                          DateFormat('yyyy-MM-dd').format(dateTask),
+                          style: TextStyle(color: Colors.grey, fontSize: 14),
+                        ),
                       ),
                     ],
                   ),
